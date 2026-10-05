@@ -1,0 +1,8 @@
+node_modules/
+.sites-runtime/
+.env
+.env.*
+!.env.example
+*.tar.gz
+*.zip
+evidence/live-*.json

@@ -1,0 +1,39 @@
+{
+  "address": "0x8e3b02a3e335b0ef8f67cb1f0d7580a9efbafe77",
+  "endpoint": "https://rpc.blockdaemon.mainnet.arc.io",
+  "block": "0x172ad85",
+  "blockHash": "0x24b7e07a015f7ea5d489ceab2e6580431598b52638fc764816d8d7123faad7b3",
+  "observedAt": "2026-10-04T22:42:35.439Z",
+  "nativeUnits": "420401130037667806682",
+  "erc20Units": "420401130",
+  "gasPrice": "20000010000",
+  "consistent": true,
+  "exact": false,
+  "nativeDustUnits": "37667806682",
+  "nativeDisplay": "420.401130037667806682",
+  "erc20Display": "420.40113",
+  "contractSimulation": {
+    "status": "passed",
+    "deployed": false,
+    "method": "eth_call with temporary state override",
+    "checks": [
+      "balance matches direct reads",
+      "chain 5042",
+      "USDC decimals 6",
+      "precision reconciliation",
+      "full balance cannot cover gas",
+      "zero amount budget"
+    ]
+  },
+  "deploymentEstimate": {
+    "gasLimit": "274930",
+    "observedGasPriceWei": "20000010000",
+    "feeCeilingWei": "40000020000",
+    "feeCeilingUsdc": "0.0109972054986",
+    "note": "Read-only simulation from a public example address, not a deployment or purchase. Re-estimate with owner wallet before signing."
+  },
+  "references": [
+    "https://docs.arc.io/arc/references/connect-to-arc",
+    "https://docs.arc.io/arc/references/contract-addresses"
+  ]
+}

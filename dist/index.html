@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ArcUnitLab — USDC, without unit mistakes</title>
+  <meta name="description" content="Exact USDC unit conversion, live Arc mainnet balance checks, and gas budget previews. No wallet connection needed.">
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./style.css">
+  <script type="module" src="./app.mjs"></script>
+</head>
+<body>
+<header class="topbar"><a class="brand" href="./"><span class="mark" aria-hidden="true">A<span>↗</span></span>ArcUnitLab</a><span class="network"><span class="dot"></span>Arc mainnet · 5042</span></header>
+<main>
+  <div class="intro"><div><p class="eyebrow">THE SAME USDC. TWO UNIT SCALES.</p><h1>Get the amount right.</h1><p class="lede">Convert units, check a live balance, and leave room for gas.</p></div><span class="readonly">Read only · no wallet needed</span></div>
+  <div class="workspace">
+  <section class="panel convert" aria-labelledby="convert-title">
+    <div class="section-head"><span class="step">01</span><h2 id="convert-title">Amount → raw units</h2></div>
+    <label for="amount">Amount in USDC</label><div class="amount-input"><input id="amount" inputmode="decimal" type="text" value="10" maxlength="100" autocomplete="off" spellcheck="false"><span>USDC</span></div>
+    <div class="presets" aria-label="Example amounts"><button data-amount="1" type="button">1</button><button data-amount="10" type="button">10</button><button data-amount="0.000001" type="button">0.000001</button></div>
+    <p id="amount-error" class="error" role="alert" hidden></p>
+    <div class="unit-card"><div class="unit-label"><span>Native value</span><span>18 decimals</span></div><output id="native-raw" class="raw">10000000000000000000</output><p>For transaction <code>value</code> and native balance.</p></div>
+    <div class="unit-card"><div class="unit-label"><span>ERC-20 amount</span><span>6 decimals</span></div><output id="token-raw" class="raw">10000000</output><p>For USDC <code>transfer</code> and <code>balanceOf</code>.</p></div>
+    <p id="unit-warning" class="callout">Using the ERC-20 number as native value sends <strong>0.00000000001 USDC</strong>, instead of 10.</p>
+  </section>
+  <section class="panel wallet" aria-labelledby="wallet-title">
+    <div class="section-head"><span class="step">02</span><h2 id="wallet-title">Check a mainnet balance</h2></div>
+    <form id="wallet-form"><label for="address">Public wallet address</label><input id="address" type="text" placeholder="0x…" maxlength="42" autocomplete="off" spellcheck="false" required><div class="actions"><button id="check" class="primary" type="submit">Check balance <span aria-hidden="true">↗</span></button><button id="example" class="text-button" type="button">Use a public example</button></div></form>
+    <p id="wallet-status" class="status" role="status" aria-live="polite">Paste any Arc address. No connection or signature required.</p>
+    <div id="balance-result" hidden>
+      <div class="balance-total"><span>Native USDC balance</span><output id="native-balance">—</output><span class="balance-unit">USDC</span></div>
+      <dl class="facts"><div><dt>ERC-20 display</dt><dd id="token-balance">—</dd></div><div><dt>Cross-check</dt><dd id="comparison">—</dd></div><div><dt>Below 0.000001 USDC</dt><dd id="dust">—</dd></div><div><dt>Block</dt><dd><a id="block-link" target="_blank" rel="noopener noreferrer">—</a></dd></div></dl>
+      <details><summary>Raw values &amp; data source</summary><dl class="facts small-facts"><div><dt>Native units</dt><dd id="snapshot-native" class="mono">—</dd></div><div><dt>ERC-20 units</dt><dd id="snapshot-token" class="mono">—</dd></div><div><dt>Provider</dt><dd id="provider">—</dd></div><div><dt>Observed (UTC)</dt><dd id="observed">—</dd></div></dl></details>
+      <button id="download" class="text-button download" type="button">Download this snapshot ↓</button>
+    </div>
+    <div id="wallet-empty" class="empty"><span aria-hidden="true">⇄</span><p>One balance. One block.<br>Two ways to read it.</p></div>
+  </section>
+  <section class="panel budget" aria-labelledby="budget-title">
+    <div class="budget-intro"><div class="section-head"><span class="step">03</span><h2 id="budget-title">Leave room for gas</h2></div><p>Preview the native transfer budget with your own gas assumptions.</p><button id="full-balance" class="text-button" type="button">Try sending the entire balance →</button></div>
+    <div class="budget-fields"><div><label for="budget-balance">Balance · USDC</label><input id="budget-balance" value="10" inputmode="decimal" maxlength="100"><p id="budget-source" class="field-note">Simulated balance. Check an address for live data.</p></div><div><label for="gas-limit">Gas limit</label><input id="gas-limit" value="21000" inputmode="numeric" maxlength="12"><p class="field-note">Example assumption; actual gas can differ.</p></div><div><label for="fee">Max fee per gas · Gwei</label><input id="fee" value="40" inputmode="decimal" maxlength="30"><p id="fee-source" class="field-note">Example ceiling; editable.</p></div></div>
+    <div class="budget-result"><div><span>Maximum gas budget</span><output id="gas-budget">0.00084 USDC</output></div><div><span>Amount + gas budget</span><output id="required">10.00084 USDC</output></div><p id="affordability" class="budget-verdict">Short by 0.00084 USDC</p></div>
+    <p id="budget-error" class="error" role="alert" hidden></p>
+    <p class="budget-note">This is a budget ceiling for the values above, not a gas estimate, transaction guarantee, or transfer. Gas also uses native USDC.</p>
+  </section>
+  </div>
+  <section class="explanation"><h2>Why the two numbers?</h2><p>Arc exposes USDC as an 18-decimal native asset and through a 6-decimal ERC-20 interface. Both represent the same balance. The ERC-20 display cannot show fractions smaller than one micro-USDC; this tool checks that any difference stays below that threshold.</p><a href="https://docs.arc.io/arc/references/contract-addresses" target="_blank" rel="noopener noreferrer">Read the Arc reference ↗</a></section>
+</main>
+<footer><span>ArcUnitLab · exact integer math</span><div><a href="https://docs.arc.io/arc/references/gas-and-fees" target="_blank" rel="noopener noreferrer">Gas reference ↗</a><span id="probe-status">Read-only helper: awaiting deployment</span></div></footer>
+</body>
+</html>

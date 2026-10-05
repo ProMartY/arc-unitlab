@@ -1,0 +1,13 @@
+{
+  "name": "arc-unitlab",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test tests/*.test.mjs",
+    "compile": "node scripts/compile.mjs",
+    "verify:mainnet": "node scripts/verify-mainnet.mjs",
+    "preview": "node scripts/preview.mjs"
+  },
+  "devDependencies": { "solc": "0.8.30" }
+}
