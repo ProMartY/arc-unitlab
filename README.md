@@ -2,10 +2,12 @@
 
 An exact USDC unit converter, live Arc mainnet balance cross-check, and native-transfer gas budget preview. Built for the difference between Arc's 18-decimal native USDC and its 6-decimal ERC-20 interface.
 
-**Current state:** the public web application reads real Arc mainnet data (chain 5042). `UnitProbe` compiles and has passed read-only execution against mainnet state using a temporary `eth_call` state override. The helper contract is **not deployed yet**; `dist/deployment.json` records this explicitly. Wallet connection on the site is paused after a MetaMask website warning; see `docs/security-review.md`. Do not describe the helper as deployed until a real receipt and its runtime bytecode are verified.
+**Current state:** the public web application reads real Arc mainnet data (chain 5042), verifies the deployed `UnitProbe` runtime bytecode in full, and checks its output against direct RPC reads at the same block hash. The owner created the helper through Remix on October 8, 2026; its successful receipt, exact creation bytecode, runtime including Solidity metadata, and live output are verified in `evidence/deployed-verification.json`. Wallet connection on the site remains paused after a MetaMask website warning; see `docs/security-review.md`.
 
 - [Live application](https://arc-unitlab.promarty766.chatgpt.site)
 - [Public source repository](https://github.com/ProMartY/arc-unitlab)
+- UnitProbe on Arc (5042): `0x1A36510311C972b6ca0f22318c15108A9fb831A8`
+- Creation transaction: `0x2d56fb9823efa59564a33c676662216fdc626571101da3a86679bd1d23fa487e`
 
 ## What it does
 
@@ -15,7 +17,7 @@ An exact USDC unit converter, live Arc mainnet balance cross-check, and native-t
 - Checks the provider's chain ID and USDC decimals before displaying results; retries the whole snapshot on provider failure.
 - Computes `amount + gasLimit × feeCeiling`, clearly labeling the gas parameters as assumptions.
 - Exports a snapshot with raw values, block hash, provider, and observation time.
-- Once configured, checks deployed helper runtime bytecode and its read-only result against the direct mainnet reads at the same block.
+- Checks deployed helper runtime bytecode and its read-only result against the direct mainnet reads at the same block.
 
 The main app requires no wallet connection. Public RPC providers receive the queried public address and the browser's normal network metadata. Wallet connection and signing have been removed from the owner page while the website warning is investigated. The site never requests keys or seed phrases.
 
@@ -44,7 +46,7 @@ This reads live public state, executes the helper through a temporary simulation
 
 The former `/deploy.html` wallet workflow is disabled. Do not override MetaMask's website warning or disable wallet protections. Deployment requires an independently reviewed owner handoff through a trusted development tool, with the network, exact contract source, compilation settings, zero transaction value, and fresh fee quote checked before signing.
 
-After deployment, save the returned record into `dist/deployment.json`, run the live verification described in `docs/deployment.md`, and publish the updated app. The app then calls the deployed helper on each balance check.
+`dist/deployment.json` records the live contract and creation transaction. Run `node scripts/verify-deployment.mjs` to reproduce the live verification described in `docs/deployment.md`. The app calls the deployed helper on each balance check. Compilation is pinned to Solidity 0.8.30, optimizer 200, and EVM Paris. The virtual source name `ProMartY/arc-unitlab/contracts/UnitProbe.sol` reproduces the metadata of the owner's GitHub import in Remix; metadata checks are never stripped or relaxed.
 
 ## Limits
 

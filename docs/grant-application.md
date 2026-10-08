@@ -1,6 +1,6 @@
 # Arc Microgrants — prepared submission
 
-**Draft: not submitted.** Complete public links, owner profile, real contract deployment, and the owner's eligibility statements before submitting. Do not copy unresolved placeholders into DoraHacks.
+**Draft: not submitted.** The public app, repository, and real Arc mainnet helper are prepared. Confirm the owner's profile and eligibility statements before submitting.
 
 ## Project name
 
@@ -16,28 +16,28 @@ ArcUnitLab helps builders avoid a specific Arc integration mistake: USDC has 18 
 
 The app converts decimal amounts with exact integer arithmetic, cross-checks native and ERC-20 balances at one canonical mainnet block hash, reports precision dust, and shows why transferring an entire native USDC balance leaves no funds for gas. A public address is enough; users do not connect a wallet or sign anything to run the checks.
 
-The companion UnitProbe contract offers read-only balance reconciliation and transfer-budget calculations. Once the owner's deployment is complete, the browser verifies its runtime bytecode and checks its output against direct RPC reads at the same block. All source, tests, compilation settings, and a dated mainnet verification record are included in the repository.
+The deployed UnitProbe contract offers read-only balance reconciliation and transfer-budget calculations. The browser verifies its full runtime bytecode, including Solidity metadata, and checks its output against direct RPC reads at the same block. All source, tests, reproducible compilation settings, and dated mainnet verification records are included in the repository.
 
 ## Why Arc
 
 The product is built around Arc's USDC denomination for both the native balance and transaction gas, and the precision difference between its native and ERC-20 USDC interfaces. It queries chain 5042, uses Arc's USDC contract at `0x3600000000000000000000000000000000000000`, and checks real mainnet state. These are operational integration checks rather than a generic token calculator.
 
-## Links to complete
+## Project links
 
 - Live public application: https://arc-unitlab.promarty766.chatgpt.site
 - Public source repository: https://github.com/ProMartY/arc-unitlab
-- Mainnet UnitProbe: [FILL FROM VERIFIED RECEIPT]
-- Creation transaction: [FILL FROM VERIFIED RECEIPT]
+- Mainnet UnitProbe (Arc, chain 5042): `0x1A36510311C972b6ca0f22318c15108A9fb831A8`
+- Creation transaction: `0x2d56fb9823efa59564a33c676662216fdc626571101da3a86679bd1d23fa487e`
 - Public builder profile: https://github.com/ProMartY
-- Optional demonstration video: [ADD IF RECORDED; DO NOT INVENT]
+- Demo walkthrough: use `docs/demo-script.md`; no demonstration video has been recorded.
 
 ## Current publication status
 
-The live app is public and read-only. Site wallet connection is paused following a MetaMask website warning; the reason is unconfirmed. The companion contract has not yet been deployed, and this draft must not be submitted as contract-deployed.
+The live app is public and read-only. The owner deployed UnitProbe through Remix on October 8, 2026 at 09:59:21 UTC, in Arc block 24883063. The creation receipt succeeded with zero transaction value. Full creation and runtime bytecode match the independently reproduced Remix build. Site wallet connection remains paused following a MetaMask website warning; the reason is unconfirmed. Visitors need no wallet connection to use the app.
 
 ## Technical validation
 
-17 initial automated tests passed for exact arithmetic, boundary inputs, same-block reads, wrong-chain detection, provider failover, and missing RPC data. The compiled contract passed simulated execution against real Arc mainnet state without spending funds. `evidence/mainnet-verification.json` contains the dated results. Final deployed-contract checks must also pass before submission.
+17 automated tests cover exact arithmetic, boundary inputs, same-block reads, wrong-chain detection, provider failover, and missing RPC data. `evidence/mainnet-verification.json` records the earlier read-only simulations. `evidence/deployed-verification.json` records successful creation, exact bytecode comparison, and a real deployed-contract call cross-checked against direct mainnet state at the same canonical block hash.
 
 ## Owner-only questions
 

@@ -1,0 +1,48 @@
+{
+  "deployment": {
+    "chainId": 5042,
+    "probeAddress": "0x1A36510311C972b6ca0f22318c15108A9fb831A8",
+    "transactionHash": "0x2d56fb9823efa59564a33c676662216fdc626571101da3a86679bd1d23fa487e",
+    "status": "Deployed and verified on Arc mainnet",
+    "createdAt": "2026-10-08T09:59:21.000Z"
+  },
+  "helper": {
+    "address": "0x1a36510311c972b6ca0f22318c15108a9fb831a8",
+    "verified": true,
+    "blockHash": "0x1e665a918d35d468e076c82e83cf339d7338a2baa0f2769300ef1c98aeed3b0b"
+  },
+  "snapshot": {
+    "address": "0x8e3b02a3e335b0ef8f67cb1f0d7580a9efbafe77",
+    "endpoint": "https://rpc.blockdaemon.mainnet.arc.io",
+    "block": "0x17c202b",
+    "blockHash": "0x1e665a918d35d468e076c82e83cf339d7338a2baa0f2769300ef1c98aeed3b0b",
+    "observedAt": "2026-10-08T14:02:43.477Z",
+    "nativeUnits": "331055512302554089312",
+    "erc20Units": "331055512",
+    "gasPrice": "20000148925",
+    "consistent": true,
+    "exact": false,
+    "nativeDustUnits": "302554089312",
+    "nativeDisplay": "331.055512302554089312",
+    "erc20Display": "331.055512"
+  },
+  "receipt": {
+    "transactionHash": "0x2d56fb9823efa59564a33c676662216fdc626571101da3a86679bd1d23fa487e",
+    "blockNumber": "0x17baf77",
+    "blockHash": "0x5a83221cc79322cdf71d510da58db7329d66e22ca4d8115b2bf3da251f07288b",
+    "gasUsed": "0x42503",
+    "effectiveGasPrice": "0x5017ff700",
+    "status": "0x1"
+  },
+  "creation": {
+    "from": "0x53d7c0abc4768fd321d38d7b1213bf656a327a85",
+    "value": "0",
+    "fullBytecodeMatches": true
+  },
+  "compiler": {
+    "version": "0.8.30+commit.73712a01.Emscripten.clang",
+    "sourceName": "ProMartY/arc-unitlab/contracts/UnitProbe.sol",
+    "evmVersion": "paris"
+  },
+  "feeNativeUnits": "5839808500000000"
+}

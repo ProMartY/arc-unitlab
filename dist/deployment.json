@@ -1,6 +1,7 @@
 {
   "chainId": 5042,
-  "probeAddress": null,
-  "transactionHash": null,
-  "status": "Awaiting owner deployment"
+  "probeAddress": "0x1A36510311C972b6ca0f22318c15108A9fb831A8",
+  "transactionHash": "0x2d56fb9823efa59564a33c676662216fdc626571101da3a86679bd1d23fa487e",
+  "status": "Deployed and verified on Arc mainnet",
+  "createdAt": "2026-10-08T09:59:21.000Z"
 }
